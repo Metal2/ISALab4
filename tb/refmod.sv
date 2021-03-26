@@ -5,6 +5,9 @@ class refmod extends uvm_component;
     packet_out tr_out;
     uvm_get_port #(packet_in) in;
     uvm_put_port #(packet_out) out;
+
+	//tmp pipe
+	packet_out tr_out0, tr_out1;
     
     function new(string name = "refmod", uvm_component parent);
         super.new(name, parent);
@@ -15,6 +18,8 @@ class refmod extends uvm_component;
     virtual function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         tr_out = packet_out::type_id::create("tr_out", this);
+		tr_out0 = packet_out::type_id::create("tr_out0", this);
+		tr_out1 = packet_out::type_id::create("tr_out1", this);
     endfunction: build_phase
     
     virtual task run_phase(uvm_phase phase);
@@ -22,9 +27,14 @@ class refmod extends uvm_component;
         
         forever begin
             in.get(tr_in);
-            tr_out.data = tr_in.A * tr_in.B; 
-            $display("refmod: input A = %d, input B = %d, output OUT = %d",tr_in.A, tr_in.B, tr_out.data);
+			
+            tr_out0.data <= $shortrealtobits($bitstoshortreal(tr_in.A) * $bitstoshortreal(tr_in.B)); //floating point mult  
+			$display("PIPE0: %b", tr_out.data);
+			tr_out1.data <= tr_out0.data;
+			$display("PIPE1: %b", tr_out.data);
+			tr_out.data = tr_out1.data;		
 			$display("refmod: input A = %b, input B = %b, output OUT = %b",tr_in.A, tr_in.B, tr_out.data);
+
             out.put(tr_out);
         end
     endtask: run_phase

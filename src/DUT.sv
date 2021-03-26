@@ -1,7 +1,6 @@
 module DUT(dut_if.port_in in_inter, dut_if.port_out out_inter, output enum logic [1:0] {INITIAL,WAIT,SEND} state);
     
-//    adder adder_under_test(.A(in_inter.A),.B(in_inter.B),.OUT(out_inter.data));
-	dadda_multiplier multiplier_under_test(.A_in(in_inter.A),.B_in(in_inter.B),.P_out(out_inter.data));
+	FPmul multiplier_under_test(.FP_A(in_inter.A),.FP_B(in_inter.B), .clk(in_inter.clk), .FP_Z(out_inter.data));
 
 
     always_ff @(posedge in_inter.clk)
@@ -21,9 +20,7 @@ module DUT(dut_if.port_in in_inter, dut_if.port_out out_inter, output enum logic
                 WAIT: begin
                     if(in_inter.valid) begin
                         in_inter.ready <= 0;
-                        //out_inter.data <= in_inter.A + in_inter.B;
-                        $display("adder: input A = %d, input B = %d, output OUT = %d",in_inter.A,in_inter.B,out_inter.data);
-                        $display("adder: input A = %b, input B = %b, output OUT = %b",in_inter.A,in_inter.B,out_inter.data);
+                        $display("Multiplier: input A = %b, input B = %b, output OUT = %b",in_inter.A,in_inter.B,out_inter.data);
                         out_inter.valid <= 1;
                         state <= SEND;
                     end
