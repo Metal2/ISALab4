@@ -10,4 +10,19 @@ class packet_in extends uvm_sequence_item;
     function new(string name="packet_in");
         super.new(name);
     endfunction: new
+
+
+	//multiply by 0
+	//constraint A_c {A ==0;}
+		
+	//multiply by 1
+	//constraint B_c {B == 1;}
+
+
+	
+
+
+
 endclass: packet_in
+
+

@@ -10,7 +10,7 @@ vcom ../src/Multiplier/common/fpround_fpround.vhd
 vcom ../src/Multiplier/common/packfp_packfp.vhd
 vcom ../src/Multiplier/common/unpackfp_unpackfp.vhd
 vcom ../src/Multiplier/mult/fpmul_stage1_struct.vhd
-vcom ../src/Multiplier/new/fpmul_stage2_struct.vhd
+vcom ../src/Multiplier/dadda/fpmul_stage2_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_stage3_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_stage4_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_pipeline.vhd
