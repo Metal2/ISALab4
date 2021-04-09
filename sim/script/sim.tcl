@@ -14,8 +14,8 @@ vcom ../src/Multiplier/dadda/fpmul_stage2_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_stage3_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_stage4_struct.vhd
 vcom ../src/Multiplier/mult/fpmul_pipeline.vhd
-
 vlog -sv ../tb/top.sv
+
 
 vsim top
 run 4 us
